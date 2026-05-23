@@ -68,7 +68,7 @@ public class Login {
             System.out.println("Cell phone number successfully added.");
             return true;
         } else{
-                System.out.println("Cell phone number incorrectly formated or does not contain international code(+27)");
+                System.out.println("Cell phone number is incorrectly formated or does not contain international code(+27)");
                 return false;
             }
         }
@@ -101,8 +101,8 @@ public class Login {
             }
         }
 
-      public String returnLoginStatus(String userName, String password){
-            boolean isSuccessLogin = loginUser(userName, password);
+      public String returnLoginStatus(String userName, String password, String phoneNumber){
+            boolean isSuccessLogin = loginUser(userName, password)& checkCellPhoneNumber(phoneNumber);
 
             if (isSuccessLogin){
                 return "Successful login!";
