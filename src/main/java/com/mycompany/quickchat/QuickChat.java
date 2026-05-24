@@ -3,7 +3,7 @@
  */
 
 package com.mycompany.quickchat;
-
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -50,6 +50,7 @@ public class QuickChat {
             Scanner scan = new Scanner(System.in);
             
             while (running){
+                System.out.println("Welcome to Quickchat.");
                 //Prompting the user to choose  menu numeric options
                 System.out.println("---Message Menu---: choose option 1-3 \n 1: Send Messages \n 2: Show recent messages \n 3: quit");
                 
@@ -61,7 +62,15 @@ public class QuickChat {
                     switch (choice){
                         case 1:
                             System.out.println("#Option 1 Selected: Send Messages");
-                            // insert method call here!
+                            System.out.println("Please enter the number of messages you wish to send");
+                            int numOfMessages = scan.nextInt();
+                            // Clears the leftover Enter space(key) from the buffer
+                            scan.nextLine();
+                            // this loop allows a user to enter the number of messages they'll send
+                            for (int i = 1; i <= numOfMessages ;i++){
+                                System.out.println("Send messages: " + i + " of " + numOfMessages);
+                                String messageToSend = scan.nextLine();
+                            }
                             break;
                         case 2:
                             System.out.println("Coming Soon!");
