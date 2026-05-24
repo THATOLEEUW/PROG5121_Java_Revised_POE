@@ -75,13 +75,13 @@ public class QuickChat {
                             //propmting user to enter recipient cell number
                             System.out.println("Enter recipient cell number:");
                             String recipientCellNum = scan.nextLine();
-                            System.out.println("Enter your message below.");
-                            String rawText = scan.nextLine();
+                            //System.out.println("Enter your message below.");
+                           // String rawText = scan.nextLine();
                             // this for loop allows a user to enter the number of messages they'll send
-                            /*for (int i = 1; i <= numOfMessages ;i++){
+                            for (int i = 1; i <= numOfMessages ;i++){
                                 System.out.println("Send messages: " + i + " of " + numOfMessages);
-                                 rawText = scan.nextLine();
-                            }*/
+                                String  rawText = scan.nextLine();
+                            
                             
                               if (rawText.length()> 250){
                                     System.out.println("Please ensure that your message is not more than 250 character long");
@@ -122,7 +122,7 @@ public class QuickChat {
                             }
                             //incrementing currentMessageCounter
                             currentMessageCounter++;
-                            
+                            } // #################### Closing TAG of For loop
                             // Message object for utility usage
                             Message msgUtilityObj = new Message();
                             System.out.println("______________________________");

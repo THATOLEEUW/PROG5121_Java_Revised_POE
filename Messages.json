@@ -1,5 +1,10 @@
 {
- "MessageID":"4513743677", 
- "Recipient":"+27543332467",
- "MessageTect":"Hello java my love "
+ "MessageID":"2904347587", 
+ "Recipient":"+27735466323",
+ "MessageText":"Hello message 1"
+}
+{
+ "MessageID":"6358428974", 
+ "Recipient":"+27735466323",
+ "MessageText":"Hello message 2"
 }
