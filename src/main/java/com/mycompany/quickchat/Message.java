@@ -8,6 +8,8 @@ package com.mycompany.quickchat;
  *
  * @author Student
  */
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,11 +17,11 @@ import java.util.List;
 import java.util.Scanner;
 public class Message {
     //Data fields for tracking each messages
-    private  String messageID;
-    private String messageText;
-    private String messageHash;
-    private String recipient;
-    private int messageNumber;
+    public  String messageID;
+    public String messageText;
+    public String messageHash;
+    public String recipient;
+    public int messageNumber;
     // static variables to keep track of messages across the app
     private static int totalMessagesSent = 0;
     private static List<String> sentMessagesHistory = new ArrayList<>();
@@ -32,6 +34,8 @@ public class Message {
         messageText = msgText;
     }
     
+    // default constructor for utility method access
+    public Message(){}
     // This method ensures that the message ID is not > 10 characters.
     public boolean checkMessageID(String messageID){
         if (messageID.length()>10){
@@ -47,7 +51,7 @@ public class Message {
         if (recipient.length() > 10 && !recipient.startsWith("+27")){
             return "Invalid recipient cell: exceeds 10 characters or doesn't starts with +27 ";
         } else {
-            return "Valid recipient cell";
+            return "Valid";
         }
     }
     // This method creates and returns the message Hash
@@ -113,7 +117,7 @@ public class Message {
         String jsonStructure = "{\n" +
                 " \"MessageID\":\""+ messageID + "\", \n" +
                 " \"Recipient\":\""+ recipient + "\",\n" +
-                " \"MessageTect\":\""+ messageText + "\"\n"+
+                " \"MessageText\":\""+ messageText + "\"\n"+
                 "}";
         try (FileWriter file = new FileWriter("Messages.json", true)){
             file.write(jsonStructure + "\n");

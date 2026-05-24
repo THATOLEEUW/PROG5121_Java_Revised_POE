@@ -48,6 +48,7 @@ public class QuickChat {
             
             boolean running = true;
             Scanner scan = new Scanner(System.in);
+             int currentMessageCounter = 0;
             
             while (running){
                 System.out.println("Welcome to Quickchat.");
@@ -62,15 +63,71 @@ public class QuickChat {
                     switch (choice){
                         case 1:
                             System.out.println("#Option 1 Selected: Send Messages");
-                            System.out.println("Please enter the number of messages you wish to send");
+                            System.out.println("Please enter the total number of messages you wish to send");
                             int numOfMessages = scan.nextInt();
                             // Clears the leftover Enter space(key) from the buffer
                             scan.nextLine();
-                            // this loop allows a user to enter the number of messages they'll send
-                            for (int i = 1; i <= numOfMessages ;i++){
-                                System.out.println("Send messages: " + i + " of " + numOfMessages);
-                                String messageToSend = scan.nextLine();
+                            
+                            if (currentMessageCounter >= numOfMessages){
+                                System.out.println("Max message limit reached: " + numOfMessages + " is the specified limit.");
+                            break;
                             }
+                            //propmting user to enter recipient cell number
+                            System.out.println("Enter recipient cell number:");
+                            String recipientCellNum = scan.nextLine();
+                            System.out.println("Enter your message below.");
+                            String rawText = scan.nextLine();
+                            // this for loop allows a user to enter the number of messages they'll send
+                            /*for (int i = 1; i <= numOfMessages ;i++){
+                                System.out.println("Send messages: " + i + " of " + numOfMessages);
+                                 rawText = scan.nextLine();
+                            }*/
+                            
+                              if (rawText.length()> 250){
+                                    System.out.println("Please ensure that your message is not more than 250 character long");
+                                    break;
+                                }else {
+                                    
+                                    System.out.println("Message sent");
+                                }
+                            // 10 auto generated digits
+                            StringBuilder idBuilder = new StringBuilder();
+                            Random rand = new Random();
+                            for (int x = 0; x < 10; x++){
+                                idBuilder.append(rand.nextInt(10));
+                            }
+                            //assigning the random 10 digits to a variable called ID
+                            String generatedID = idBuilder.toString();
+                            //Message class object
+                            Message newMessage = new Message(generatedID, currentMessageCounter,recipientCellNum, rawText);
+                            
+                            if (!newMessage.checkMessageID(generatedID)){
+                                System.out.println("Invalid message ID format");
+                                break;
+                            }
+                            
+                            String cellValidation = newMessage.checkRecipientCell();
+                            if (!cellValidation.equals("Valid")){
+                                System.out.println(cellValidation);
+                                break;
+                            }
+                            
+                            String actionResult = newMessage.SentMessage();
+                            System.out.println(actionResult);
+                            if (actionResult.equals("Message successfully sent")){
+                                System.out.println("**Outbound Descriptors**"+ '\n'+ "Message ID: " + newMessage.messageID);
+                                System.out.println("Message Hash: " + newMessage.messageHash);
+                                System.out.println( "Recipient: " + newMessage.recipient);
+                                System.out.println("Message: " + newMessage.messageText);
+                            }
+                            //incrementing currentMessageCounter
+                            currentMessageCounter++;
+                            
+                            // Message object for utility usage
+                            Message msgUtilityObj = new Message();
+                            System.out.println("______________________________");
+                            System.out.println("Total messages sent during runtime: "+ msgUtilityObj.returnTotalMessages());
+                            System.out.println(msgUtilityObj.printMessage());
                             break;
                         case 2:
                             System.out.println("Coming Soon!");
@@ -88,6 +145,7 @@ public class QuickChat {
                 }
             
             }
+            scan.close();
         }
             //closing the scanner object
             userInput.close();
