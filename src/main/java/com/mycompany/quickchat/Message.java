@@ -22,6 +22,7 @@ public class Message {
     public String messageHash;
     public String recipient;
     public int messageNumber;
+    
     // static variables to keep track of messages across the app
     private static int totalMessagesSent = 0;
     private static List<String> sentMessagesHistory = new ArrayList<>();
