@@ -1,10 +1,24 @@
 {
- "MessageID":"2904347587", 
- "Recipient":"+27735466323",
- "MessageText":"Hello message 1"
+ "MessageID":"2886576433", 
+ "Message Hash":"28:0:HEYOUT",
+ "Recipient":"+27607054361",
+ "MessageText":"Hey, i think i might have figured it out. if this text comes with an actual message Hash instead of dull then yes i figured it out. "
 }
 {
- "MessageID":"6358428974", 
- "Recipient":"+27735466323",
- "MessageText":"Hello message 2"
+ "MessageID":"3818549708", 
+ "Message Hash":"38:0:HEYMESSAGES",
+ "Recipient":"+27725299737",
+ "MessageText":"Hey the message hash works, now i have a problem with the JSON file as it overrides any existing messages."
+}
+{
+ "MessageID":"8371536613", 
+ "Message Hash":"83:0:IWAY",
+ "Recipient":"+277627463423",
+ "MessageText":"I saw another bug, the program doesn't display stored messages without sending a message, which it shouldn't behave that way."
+}
+{
+ "MessageID":"6445947229", 
+ "Message Hash":"64:0:JUSTEXTRACTION",
+ "Recipient":"+27725299737",
+ "MessageText":"Just checking if everything works for the message hash extraction"
 }

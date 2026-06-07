@@ -115,15 +115,17 @@ public class Message {
     
     //This method should store the messages in JSON.
     public void storeMessage(){
+        createMessageHash();
         String jsonStructure = "{\n" +
                 " \"MessageID\":\""+ messageID + "\", \n" +
+                " \"Message Hash\":\""+ messageHash + "\",\n" +
                 " \"Recipient\":\""+ recipient + "\",\n" +
                 " \"MessageText\":\""+ messageText + "\"\n"+
                 "}";
         try (FileWriter file = new FileWriter("Messages.json", true)){
             file.write(jsonStructure + "\n");
         }catch (IOException e){
-            System.out.println("An error occurred while saving to JSON:"+e.getMessage());
+            System.out.println("An error occurred while saving to JSON:"+ e.getMessage());
         }     
     }
 }

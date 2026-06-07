@@ -7,6 +7,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.io.File;                  
 import java.io.FileNotFoundException; 
+//import com.google.gson.JsonObject;
+//import com.google.gson.JsonParser;
+//import java.io.FileReader;
 
 /**
  *
@@ -128,7 +131,7 @@ public class QuickChat {
                                 String actionResult = newMessage.SentMessage();
                                 System.out.println(actionResult);
                                 if (actionResult.equals("Message successfully sent")){
-                                    System.out.println("**Outbound Descriptors**"+ '\n'+ "Message ID: " + newMessage.messageID);
+                                    System.out.println("Message Information: "+ '\n'+ "Message ID: " + newMessage.messageID);
                                     System.out.println("Message Hash: " + newMessage.messageHash);
                                     System.out.println( "Recipient: " + newMessage.recipient);
                                     System.out.println("Message: " + newMessage.messageText);
@@ -138,7 +141,6 @@ public class QuickChat {
                                     recipients[msgCounter] = newMessage.recipient;
                                     messages[msgCounter] = newMessage.messageText;
                                     msgStatus[msgCounter] = "Sent";
-                                
                                     msgCounter++;
                                 }
                                 currentMessageCounter++;
@@ -187,7 +189,8 @@ public class QuickChat {
                                                 System.out.println("No messages are currently stored.");
                                             } else {
                                                 for (int i = 0; i < msgCounter; i++) {
-                                                    System.out.println("Message " + (i + 1) + " | Recipient: " + recipients[i] + " | Status: " + msgStatus[i]);
+                                                    System.out.println("Message " + (i + 1) + " | Recipient: " + recipients[i]
+                                                            + " | Status: " + msgStatus[i]+ " | Sender: " + phoneNumber);
                                                 }
                                             }
                                             break;
@@ -259,9 +262,10 @@ public class QuickChat {
         }
         userInput.close();
     }
+    
 
-    //  SEPARATED PART 3 METHODS TO BE FRIENDLY WITH JUNIT TESTING 
-    //-----------------------------------
+    // PART 3 METHODS 
+    //------------------------------------------------------------
 
     // Gets longest message
     public static String getLongestMessage() {
@@ -345,24 +349,29 @@ public class QuickChat {
     // Reads from the JSON file
     public static void loadMessagesFromJSON() {
         try {
+            // Parsing the JSON file
+           // JsonObject jsonObject = JsonParser.parseReader(new FileReader("Messages.json")).getAsJsonObject();
+            // Extracting the hash
+          //  String messageHash = jsonObject.get("Message Hash").getAsString();
             File myFile = new File("Messages.json");
             Scanner fileReader = new Scanner(myFile);
             
             msgCounter = 0;
-            System.out.println("\n--- Loading Stored Data from Messages.json ---");
+            System.out.println("--- Loading Stored Data from Messages.json ---");
             
             while (fileReader.hasNextLine() && msgCounter < MAX_MSGS) {
                 String line = fileReader.nextLine();
                 
                 if (line.contains("\"MessageID\"")) {
                     msgIDs[msgCounter] = extractJSONValue(line);
+                    
+                } else if (line.contains("\"Message Hash\"")){
+                    msgHashes[msgCounter] = extractJSONValue(line);; 
                 } else if (line.contains("\"Recipient\"")) {
                     recipients[msgCounter] = extractJSONValue(line);
                 } else if (line.contains("\"MessageText\"")) {
                     messages[msgCounter] = extractJSONValue(line);
-                    
                     msgStatus[msgCounter] = "Stored";
-                    msgHashes[msgCounter] = "LOADED_MSG_" + (msgCounter + 1); 
                     msgCounter++; 
                 }
             }
@@ -375,8 +384,10 @@ public class QuickChat {
     }
     // Helping method for JSON
     private static String extractJSONValue(String jsonLine) {
-        String[] parts = jsonLine.split(":");
-        if (parts.length > 1) {
+        // Passing 2 splits the line into a maximum of 2 parts: 
+        // parts[0] is the key, parts[1] is EVERYTHING after the first colon.
+        String[] parts = jsonLine.split(":", 2);
+        if (parts.length > 1 ) {
             return parts[1].replaceAll("[\",]", "").trim();
         }
         return "";
