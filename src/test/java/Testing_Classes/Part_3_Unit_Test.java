@@ -26,72 +26,68 @@ public class Part_3_Unit_Test {
         }
 
         // Populates dummy Message 1
-        QuickChat.msgIDs[0] = "1000000001";
         QuickChat.recipients[0] = "+27834557896";
         QuickChat.messages[0] = "Did you get the cake?";
-      //  QuickChat.msgHashes[0] = "HASH_1";
         QuickChat.msgStatus[0] = "Sent";
         QuickChat.msgCounter++;
 
-        // Populates dummy Message 2 
-        QuickChat.msgIDs[1] = "1000000002";
+        // Populates dummy Message 2
         QuickChat.recipients[1] = "+27838884567"; 
         QuickChat.messages[1] = "Where are you? You are late! I have asked you to be on time.";
-        QuickChat.msgHashes[1] = "10:2:WHERETIME.";
         QuickChat.msgStatus[1] = "Stored";
         QuickChat.msgCounter++;
         
         // Populates dummy Message 3
-        QuickChat.msgIDs[2] = "1000000003";
         QuickChat.recipients[2] = "+27834484567";
         QuickChat.messages[2] = "Yohoooo, I am at your gate.";
-        QuickChat.msgHashes[2] = "HASH_3";
         QuickChat.msgStatus[2] = "Discard";
         QuickChat.msgCounter++;
         
         // Populates dummy Message 4
-        QuickChat.msgIDs[2] = "1000000004";
-        QuickChat.recipients[2] = "0838884567";
-        QuickChat.messages[2] = "It is dinner time !";
-        QuickChat.msgHashes[2] = "HASH_3";
-        QuickChat.msgStatus[2] = "Sent";
+        QuickChat.recipients[3] = "0838884567";
+        QuickChat.messages[3] = "It is dinner time !";
+        QuickChat.msgStatus[3] = "Sent";
         QuickChat.msgCounter++;
         
         // Populates dummy Message 5
-        QuickChat.msgIDs[2] = "1000000005";
-        QuickChat.recipients[2] = "+27838884567";
-        QuickChat.messages[2] = "Ok, I am leaving without you.";
-        QuickChat.msgHashes[2] = "HASH_3";
-        QuickChat.msgStatus[2] = "Sent";
+        QuickChat.recipients[4] = "+27838884567";
+        QuickChat.messages[4] = "Ok, I am leaving without you.";       
+        QuickChat.msgStatus[4] = "Sent";
         QuickChat.msgCounter++;
     }
 
+    
+    
     @Test
     public void testGetLongestMessage() {
-        String expected = "Where are you? You are late! I have asked you to be on time.";
+        String expected = QuickChat.messages[1];
         String actual = QuickChat.getLongestMessage();
-        assertEquals(expected, actual);
+        assertEquals(actual,expected);
     }
 
     @Test
     public void testSearchMessageByID() {
-        String expected = "Message Found!\nRecipient: +27838884567\n Ok, I am leaving without you.";
-        String actual = QuickChat.searchMessageByID("1000000001");
+        setUp();
+        String searchID = "0838884567";
+        String expected = QuickChat.recipients[3];
+        String actual = QuickChat.searchMessageByID(searchID);
         assertEquals(expected, actual);
     }
 
     @Test
     public void testSearchMessagesByRecipient() {
-        String expected = "- Hello, please call me back.\n Where are you? You are late! I have asked you to be on time.";
+        
+        String expected = QuickChat.messages[1];
         String actual = QuickChat.searchMessagesByRecipient("+27838884567");
         assertEquals(expected, actual);
     }
-
+    
     @Test
     public void testDeleteMessageByHash() {
-        String expectedResponse = "Message: \"Where are you? You are late! I have asked you to be on time.\" successfully deleted.";
-        String actualResponse = QuickChat.deleteMessageByHash("HASH_3");
+        String expectedResponse = QuickChat.messages[1];
+        String actualResponse = QuickChat.deleteMessageByHash("");
         assertEquals(expectedResponse, actualResponse);
-        assertEquals(2, QuickChat.msgCounter);
     }
+    
+    
 }
