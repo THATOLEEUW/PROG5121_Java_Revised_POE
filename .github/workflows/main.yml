@@ -18,7 +18,7 @@ jobs:
       - name: Set up JDK 25.0.2+10-LTS
         uses: actions/setup-java@v2
         with:
-          java-version: '29'
+          java-version: '25'
           distribution: 'adopt'
 
       - name: Build
