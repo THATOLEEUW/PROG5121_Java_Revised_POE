@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
  */
 public class QuickChat {
    // max number of messages 
-  public static final int MAX_MSGS = 5;
+  public static final int MAX_MSGS = 10;
    // tracks the number of loaded messages
   public static int msgCounter = 0;
     
@@ -190,7 +190,7 @@ public class QuickChat {
                                             } else {
                                                 for (int i = 0; i < msgCounter; i++) {
                                                     System.out.println("Message " + (i + 1) + " | Recipient: " + recipients[i]
-                                                            + " | Status: " + msgStatus[i]+ " | Sender: " + phoneNumber);
+                                                            + " | Sender: " + phoneNumber + " | Status: " + msgStatus[i]);
                                                 }
                                             }
                                             break;
@@ -282,7 +282,7 @@ public class QuickChat {
     // Seaches message by ID
     public static String searchMessageByID(String searchID) {
         for (int i = 0; i < msgCounter; i++) {
-            if (msgIDs[i] != null && msgIDs[i].equals(searchID)) {
+            if (msgIDs[i] != null && msgIDs[i].equals (searchID)) {
                 return "Message Found!\nRecipient: " + recipients[i] + "\nMessage: " + messages[i];
             }
         }
@@ -295,6 +295,8 @@ public class QuickChat {
 
         for (int i = 0; i < msgCounter; i++) {
             if (recipients[i] != null && recipients[i].equals(searchNum)) {
+                // formats RECIPIENT MESSAGE  to have a bullet point (adding a "- " at the beginning and a new line "\n" at the end), 
+                // and glues it onto a  growing message text list called foundMessages
                 foundMessages.append("- ").append(messages[i]).append("\n");
                 found = true;
             }
@@ -392,4 +394,4 @@ public class QuickChat {
         }
         return "";
     }
-}
+} 
